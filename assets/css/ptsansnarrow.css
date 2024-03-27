@@ -1,0 +1,7 @@
+@font-face {
+  font-family: "PTSansNarrow";
+  font-display: swap;
+  font-style: normal;
+  src: url("../fonts/narrow/PTSansNarrow-Regular.ttf") format("TrueType"),
+    url("../fonts/narrow/PTSansNarrow-Bold.ttf") format("TrueType");
+}

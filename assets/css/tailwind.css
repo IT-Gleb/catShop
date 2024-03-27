@@ -1,0 +1,12 @@
+@import url("montserrat.css");
+@import url("ptsansnarrow.css");
+@import url("neucha.css");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-white text-slate-700 text-[1rem]/[1.2rem] font-myArial min-w-[280px] overflow-x-hidden flex flex-col;
+  }
+}

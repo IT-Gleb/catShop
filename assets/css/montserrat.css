@@ -1,0 +1,18 @@
+@font-face {
+  font-family: "Montserrat";
+  font-display: swap;
+  font-style: normal;
+  src: url("../fonts/montserrat/Montserrat-VariableFont_wght.ttf")
+      format("TrueType"),
+    url("../fonts/montserrat/static/Montserrat-Black.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-Bold.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-ExtraBold.ttf")
+      format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-ExtraLight.ttf")
+      format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-Light.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-Medium.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-Regular.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-SemiBold.ttf") format("truetype"),
+    url("../fonts/montserrat/static/Montserrat-Thin.ttf") format("truetype");
+}
