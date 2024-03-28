@@ -1,8 +1,24 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCatStore } from "~/store/catStore";
+
+const store = useCatStore();
+const { isActive } = storeToRefs(store);
+const { setActive } = store;
+
+const callStore = (event: Event) => {
+  event.preventDefault();
+  if (isActive.value) {
+    setActive(false);
+  } else {
+    setActive(true);
+  }
+};
+</script>
 
 <template>
   <button
     title="Корзина"
+    @click="callStore"
     class="w-[42px] h-[42px] bg-white rounded-full overflow-hidden active:scale-75"
   >
     <div class="w-[100%] h-[100%] relative">

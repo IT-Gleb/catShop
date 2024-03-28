@@ -3,10 +3,13 @@ import type { TItem, TItemData } from "~/mytypes/lib";
 
 export const useCatStore = defineStore("catStore", () => {
   const items = ref<TItemData>([]);
+  const active = ref<boolean>(false); //Для показа корзины заказов
 
   const itemsSize = computed(() => {
     return items.value.length;
   });
+
+  const isActive = computed(() => active.value);
 
   const ItemCount = (paramId: number) =>
     computed(() => {
@@ -42,8 +45,14 @@ export const useCatStore = defineStore("catStore", () => {
     }
   }
 
+  function setActive(param: boolean) {
+    active.value = param;
+  }
+
   return {
     itemsSize,
+    isActive,
+    setActive,
     ItemCount,
     AddItem,
     DeleteItem,

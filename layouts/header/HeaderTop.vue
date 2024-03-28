@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { Cats_URL, Run_URL, Action_URL, Contacts_URL } from "~/mytypes/lib";
+
+const active = ref<boolean>(false);
 </script>
 
 <template>
