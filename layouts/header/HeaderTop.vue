@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import { Cats_URL, Run_URL, Action_URL, Contacts_URL } from "~/mytypes/lib";
+</script>
+
 <template>
   <div class="w-[100%] h-[82px] bg-[#062D4E] text-white font-montserrat">
     <section
@@ -28,19 +32,19 @@
         <ul
           class="flex items-center justify-center gap-x-4 text-[16px]/[20px] p-8 tracking-[0.05em]"
         >
-          <li><a href="#">Котики</a></li>
+          <li><RouterLink :to="Cats_URL">Котики</RouterLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><a href="#">Доставка</a></li>
+          <li><RouterLink :to="Run_URL">Доставка</RouterLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><a href="#">Акции</a></li>
+          <li><RouterLink :to="Action_URL">Акции</RouterLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><a href="#">Контакты</a></li>
+          <li><RouterLink :to="Contacts_URL">Контакты</RouterLink></li>
         </ul>
       </div>
       <div
