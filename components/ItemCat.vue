@@ -7,7 +7,7 @@ const isActive = ref<boolean>(false);
 const ThisItem = ref<TItem>(props.pItem);
 
 const store = useCatStore();
-const { AddItem, setItemCount, DeleteItem } = store;
+const { AddItem, setItemCount, DeleteItem, inBag } = store;
 
 const clickActive = () => {
   isActive.value = !isActive.value;
@@ -29,10 +29,12 @@ const minusCount = () => {
   //Закрыть количество, Удалить из хранилища(корзины)
   if (ThisItem.value.count === 0) {
     DeleteItem(ThisItem.value.id);
-    clickActive();
   }
   //console.log(itemsSize.value);
 };
+watchEffect(() => {
+  isActive.value = inBag(ThisItem.value.id).value;
+});
 </script>
 
 <template>

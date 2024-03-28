@@ -11,6 +11,8 @@ export const useCatStore = defineStore("catStore", () => {
 
   const isActive = computed(() => active.value);
 
+  const allItems = computed(() => items.value);
+
   const ItemCount = (paramId: number) =>
     computed(() => {
       let found = items.value.find((item) => item.id === paramId);
@@ -18,6 +20,16 @@ export const useCatStore = defineStore("catStore", () => {
         return found.count;
       } else {
         return 0;
+      }
+    });
+
+  const inBag = (paramId: number) =>
+    computed(() => {
+      let found = items.value.find((item) => item.id === paramId);
+      if (found !== undefined) {
+        return true;
+      } else {
+        return false;
       }
     });
 
@@ -52,6 +64,8 @@ export const useCatStore = defineStore("catStore", () => {
   return {
     itemsSize,
     isActive,
+    allItems,
+    inBag,
     setActive,
     ItemCount,
     AddItem,

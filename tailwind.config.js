@@ -23,6 +23,15 @@ export default {
         ptSansNarrow: ["PTSansNarrow"],
         myArial: ["Arial", "sans-serif"],
       },
+      keyframes: {
+        fromRight: {
+          "0%": { transform: "translateX(6500px)" },
+          "100%": { transform: "translateX(0)" },
+        },
+      },
+      animation: {
+        fromRight: "fromRight 0.35s ease",
+      },
     },
   },
   plugins: [],
