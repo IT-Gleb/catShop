@@ -5,7 +5,7 @@ import { Cats_URL, Run_URL, Action_URL, Contacts_URL } from "~/mytypes/lib";
 <template>
   <div class="w-[100%] h-[82px] bg-[#062D4E] text-white font-montserrat">
     <section
-      class="w-[98%] xl:max-w-[100%] mx-auto px-[20px] xl:px-[40px] 2xl:px-[120px] 4xl:px-[375px] grid grid-cols-[24px_1fr_24px] md:grid-cols-[20px_90px_1fr_240px] lg:grid-cols-[20px_1fr_1fr_240px] xl:grid-cols-[204px_1fr_280px_280px]"
+      class="w-[98%] xl:max-w-[100%] mx-auto appPadding grid grid-cols-[24px_1fr_24px] md:grid-cols-[20px_90px_1fr_240px] lg:grid-cols-[20px_1fr_1fr_240px] xl:grid-cols-[204px_1fr_280px_280px]"
     >
       <div class="block xl:hidden pt-7">
         <UIBurgerButton />
@@ -19,14 +19,14 @@ import { Cats_URL, Run_URL, Action_URL, Contacts_URL } from "~/mytypes/lib";
             loading="lazy"
           />
         </div>
-        <a class="hidden xl:block" href="#">
+        <RouterLink class="hidden xl:block" to="/">
           <img
             class="w-[204px] drop-shadow-[1px_-1px_16px_0px_#0000000F]"
             src="/assets/images/header/logoCat.svg"
             alt="main-logo"
             loading="lazy"
           />
-        </a>
+        </RouterLink>
       </div>
       <div class="hidden xl:block">
         <ul
@@ -79,3 +79,9 @@ import { Cats_URL, Run_URL, Action_URL, Contacts_URL } from "~/mytypes/lib";
     </section>
   </div>
 </template>
+
+<style scoped>
+.appPadding {
+  @apply px-[20px] xl:px-[40px] 2xl:px-[120px] 4xl:px-[375px];
+}
+</style>

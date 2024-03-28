@@ -1,5 +1,6 @@
 <template>
   <MainWrapper>
-    <div>Index page</div>
+    <MenuMainMenu />
+    <CatItems />
   </MainWrapper>
 </template>
