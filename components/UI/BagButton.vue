@@ -3,13 +3,14 @@ import { useCatStore } from "~/store/catStore";
 
 const store = useCatStore();
 const { isActive } = storeToRefs(store);
-const { setActive } = store;
+const { setActive, setPanel } = store;
 
 const callStore = (event: Event) => {
   event.preventDefault();
   if (isActive.value) {
     setActive(false);
   } else {
+    setPanel(true);
     setActive(true);
   }
 };

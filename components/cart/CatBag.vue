@@ -2,8 +2,12 @@
 import { useCatStore } from "~/store/catStore";
 
 const store = useCatStore();
-const { isActive } = storeToRefs(store);
+const { isActive, isActivePanel, allPrice } = storeToRefs(store);
 const { setActive } = store;
+
+const activate = ref<boolean>(false);
+const isClosePanel = ref<boolean>(false);
+const allItemsSum = ref<number>(0);
 
 const clickDeactivate = (event: Event) => {
   event.preventDefault();
@@ -11,12 +15,18 @@ const clickDeactivate = (event: Event) => {
 };
 
 //console.log(props.isActive);
+watchEffect(() => {
+  activate.value = isActive.value;
+  isClosePanel.value = isActivePanel.value;
+  allItemsSum.value = allPrice.value;
+  // console.log(activate.value);
+});
 </script>
 
 <template>
   <Teleport to="body">
     <div
-      v-if="isActive"
+      v-if="activate"
       @click.stop="clickDeactivate"
       class="fixed left-0 top-0 bottom-0 right-0 bg-black/70 z-10"
     >
@@ -29,7 +39,8 @@ const clickDeactivate = (event: Event) => {
             return true;
           }
         "
-        class="w-[612px] h-[100%] bg-[#EBE1D7] relative z-30 ml-auto animate-fromRight"
+        class="w-[612px] h-[100%] bg-[#EBE1D7] relative z-30 ml-auto"
+        :class="isClosePanel ? 'animate-fromRight' : 'animate-toRight'"
       >
         <div
           class="w-fit mx-auto text-[#312525] flex items-center justify-center gap-x-[40px] pt-[40px]"
@@ -42,6 +53,17 @@ const clickDeactivate = (event: Event) => {
         </div>
         <!-- Заказы в корзине -->
         <CartCatBagItems />
+
+        <!-- Общая сумма -->
+        <div class="pl-[45px] mt-8 max-w-[70%]">
+          <span
+            class="font-neucha font-[400] text-[20px]/[22px] tracking-[0.05em] text-black"
+            >Общая сумма: {{ allItemsSum }} ₽
+          </span>
+          <p class="mt-4 text-[16px]/[20px] tracking-[0.03em]">
+            *Сумма заказа для доставки курьером должна составлять не менее 500 ₽
+          </p>
+        </div>
 
         <!-- //Кнопки заказов -->
         <div

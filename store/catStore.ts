@@ -4,12 +4,14 @@ import type { TItem, TItemData } from "~/mytypes/lib";
 export const useCatStore = defineStore("catStore", () => {
   const items = ref<TItemData>([]);
   const active = ref<boolean>(false); //Для показа корзины заказов
+  const activePanel = ref<boolean>(false); //Для скрытия панели
 
   const itemsSize = computed(() => {
     return items.value.length;
   });
 
   const isActive = computed(() => active.value);
+  const isActivePanel = computed(() => activePanel.value);
 
   const allItems = computed(() => items.value);
 
@@ -32,6 +34,28 @@ export const useCatStore = defineStore("catStore", () => {
         return false;
       }
     });
+
+  const priceItem = (paramId: number) =>
+    computed(() => {
+      let found: TItem | undefined = items.value.find(
+        (item) => item.id === paramId
+      );
+      if (found !== undefined) {
+        return found.count * found.price;
+      } else {
+        return 0;
+      }
+    });
+
+  const allPrice = computed(() => {
+    return items.value.reduce((acc, item) => {
+      return acc + item.count * item.price;
+    }, 0);
+  });
+
+  function setPanel(param: boolean) {
+    activePanel.value = param;
+  }
 
   function AddItem(param: TItem) {
     let found = items.value.find(
@@ -65,11 +89,15 @@ export const useCatStore = defineStore("catStore", () => {
     itemsSize,
     isActive,
     allItems,
+    isActivePanel,
+    allPrice,
     inBag,
     setActive,
     ItemCount,
     AddItem,
     DeleteItem,
     setItemCount,
+    setPanel,
+    priceItem,
   };
 });

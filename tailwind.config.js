@@ -28,9 +28,14 @@ export default {
           "0%": { transform: "translateX(6500px)" },
           "100%": { transform: "translateX(0)" },
         },
+        toRight: {
+          "0%": { transform: "translateX(0)", opacity: "1" },
+          "100%": { transform: "translateX(6500px)", opacity: "0" },
+        },
       },
       animation: {
         fromRight: "fromRight 0.35s ease",
+        toRight: "toRight 0.6s linear",
       },
     },
   },

@@ -11,11 +11,15 @@ const { AddItem, setItemCount, DeleteItem, inBag } = store;
 
 const clickActive = () => {
   isActive.value = !isActive.value;
+  if (isActive.value) {
+    ThisItem.value.count++;
+    AddItem(ThisItem.value);
+  }
 };
 
 const addCount = () => {
   ThisItem.value.count++;
-  AddItem(ThisItem.value);
+
   setItemCount(ThisItem.value.id, ThisItem.value.count);
   //console.log(itemsSize.value);
 };

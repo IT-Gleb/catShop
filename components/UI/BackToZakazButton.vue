@@ -2,12 +2,22 @@
 import { useCatStore } from "~/store/catStore";
 
 const store = useCatStore();
-const { setActive } = store;
+const { setActive, setPanel } = store;
+const timerRef = ref<number>(-1);
 
 const clickButton = (event: Event) => {
   event.preventDefault();
-  setActive(false);
+  setPanel(false); //Закрыть панедб
+  timerRef.value = setTimeout(() => {
+    setActive(false);
+  }, 250);
 };
+
+onUnmounted(() => {
+  if (timerRef.value !== -1) {
+    clearTimeout(timerRef.value);
+  }
+});
 </script>
 
 <template>
