@@ -32,10 +32,20 @@ export default {
           "0%": { transform: "translateX(0)", opacity: "1" },
           "100%": { transform: "translateX(6500px)", opacity: "0" },
         },
+        fromTop: {
+          from: { transform: "translateY(-4500px)" },
+          to: { transform: "translateY(0)" },
+        },
+        toTop: {
+          from: { transform: "translateY(0)" },
+          to: { transform: "translateY(-4500px)" },
+        },
       },
       animation: {
         fromRight: "fromRight 0.35s ease",
         toRight: "toRight 0.6s linear",
+        fromTop: "fromTop 0.35s ease",
+        toTop: "toTop 0.35s ease",
       },
     },
   },

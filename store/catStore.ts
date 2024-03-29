@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import type { TItem, TItemData } from "~/mytypes/lib";
+import { _orderBy } from "#imports";
 
 export const useCatStore = defineStore("catStore", () => {
   const items = ref<TItemData>([]);
@@ -65,11 +66,17 @@ export const useCatStore = defineStore("catStore", () => {
     );
     if (found === undefined) {
       items.value.push(param);
+      if (items.value.length > 1) {
+        items.value = _orderBy(items.value, ["price"], ["desc"]);
+      }
     }
   }
 
   function DeleteItem(paramId: number) {
     items.value = items.value.filter((item) => item.id !== paramId);
+    if (items.value.length > 1) {
+      items.value = _orderBy(items.value, ["price"], ["desc"]);
+    }
   }
 
   function setItemCount(paramId: number, paramCount: number) {

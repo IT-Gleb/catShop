@@ -2,9 +2,20 @@
 export default defineNuxtConfig({
   devtools: { enabled: false },
   css: ["~/assets/css/tailwind.css"],
-  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt"],
+  modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "nuxt-lodash"],
   pinia: {
     storesDirs: ["~/store/**"],
+  },
+  lodash: {
+    prefix: "_",
+    prefixSkip: ["string"],
+    upperAfterPrefix: false,
+    exclude: ["map"],
+    alias: [
+      ["camelCase", "stringToCamelCase"], // => stringToCamelCase
+      ["kebabCase", "stringToKebab"], // => stringToKebab
+      ["isDate", "isLodashDate"], // => _isLodashDate
+    ],
   },
 
   tailwindcss: {

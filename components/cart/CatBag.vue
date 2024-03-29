@@ -1,17 +1,29 @@
 <script setup lang="ts">
 import { useCatStore } from "~/store/catStore";
+import { useOrder } from "~/store/orderStore";
 
 const store = useCatStore();
 const { isActive, isActivePanel, allPrice } = storeToRefs(store);
 const { setActive } = store;
 
+const order = useOrder();
+const { setOrderActive } = order;
+
 const activate = ref<boolean>(false);
 const isClosePanel = ref<boolean>(false);
 const allItemsSum = ref<number>(0);
+const showOrder = ref<boolean>(false);
 
 const clickDeactivate = (event: Event) => {
   event.preventDefault();
+  setOrderActive(false);
   setActive(false);
+};
+
+const showOrderForm = () => {
+  showOrder.value = true;
+  setOrderActive(showOrder.value);
+  showOrder.value = false;
 };
 
 //console.log(props.isActive);
@@ -36,7 +48,7 @@ watchEffect(() => {
       <div
         @click.stop="
           () => {
-            return true;
+            return false;
           }
         "
         class="w-[612px] h-[100%] bg-[#EBE1D7] relative z-30 ml-auto"
@@ -70,8 +82,9 @@ watchEffect(() => {
           class="fixed px-[70px] w-fit mx-auto bottom-11 flex items-center justify-evenly gap-x-[30px]"
         >
           <UIBackToZakazButton />
-          <UIOrderButton />
+          <UIOrderButton @order-form="showOrderForm" />
         </div>
+        <FormOrder />
       </div>
     </div>
   </Teleport>
