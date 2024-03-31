@@ -21,32 +21,32 @@ const active = ref<boolean>(false);
             loading="lazy"
           />
         </div>
-        <RouterLink class="hidden xl:block" to="/">
+        <NuxtLink class="hidden xl:block" to="/">
           <img
             class="w-[204px] drop-shadow-[1px_-1px_16px_0px_#0000000F]"
             src="/assets/images/header/logoCat.svg"
             alt="main-logo"
             loading="lazy"
           />
-        </RouterLink>
+        </NuxtLink>
       </div>
       <div class="hidden xl:block">
         <ul
           class="flex items-center justify-center gap-x-4 text-[16px]/[20px] p-8 tracking-[0.05em]"
         >
-          <li><RouterLink :to="Cats_URL">Котики</RouterLink></li>
+          <li><NuxtLink :to="Cats_URL">Котики</NuxtLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><RouterLink :to="Run_URL">Доставка</RouterLink></li>
+          <li><NuxtLink :to="Run_URL">Доставка</NuxtLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><RouterLink :to="Action_URL">Акции</RouterLink></li>
+          <li><NuxtLink :to="Action_URL">Акции</NuxtLink></li>
           <li>
             <span class="block w-[4px] h-[4px] rounded-full bg-white"></span>
           </li>
-          <li><RouterLink :to="Contacts_URL">Контакты</RouterLink></li>
+          <li><NuxtLink :to="Contacts_URL">Контакты</NuxtLink></li>
         </ul>
       </div>
       <div

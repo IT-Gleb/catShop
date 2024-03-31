@@ -1,16 +1,17 @@
 <script setup lang="ts">
+import { delayButton } from "~/mytypes/lib";
 import { useCatStore } from "~/store/catStore";
 
 const store = useCatStore();
 const { setActive, setPanel } = store;
-const timerRef = ref<number>(-1);
+const timerRef = ref<any>(-1);
 
 const clickButton = (event: Event) => {
   event.preventDefault();
   setPanel(false); //Закрыть панедб
   timerRef.value = setTimeout(() => {
     setActive(false);
-  }, 250);
+  }, delayButton);
 };
 
 onUnmounted(() => {

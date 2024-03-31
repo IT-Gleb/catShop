@@ -1,4 +1,5 @@
 <template>
+  <NuxtLoadingIndicator color="navy" />
   <MainWrapper>
     <CartCatBag></CartCatBag>
     <MenuMainMenu />

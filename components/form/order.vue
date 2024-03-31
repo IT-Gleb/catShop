@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { delayButton } from "~/mytypes/lib";
 import { useCatStore } from "~/store/catStore";
 import { useOrder } from "~/store/orderStore";
 
@@ -12,7 +13,7 @@ const { setOrderActive } = orderStore;
 
 const isShow = ref<boolean>(false);
 const isOut = ref<boolean>(false);
-const timerRef = ref<number>(-1);
+const timerRef = ref<any>(-1);
 
 const clickClose = (event: Event) => {
   event.preventDefault();
@@ -20,7 +21,7 @@ const clickClose = (event: Event) => {
   timerRef.value = setTimeout(() => {
     setOrderActive(false);
     isOut.value = false;
-  }, 280);
+  }, delayButton);
 };
 
 watch(getActive, () => {
@@ -108,6 +109,8 @@ onUnmounted(() => {
           </div>
         </div>
       </div>
+      <!-- Форма ввода и валидации -->
+      <FormData />
 
       <div
         class="mt-[14px] w-[540px] max-h-[290px] px-4 pt-4 overflow-hidden bg-white border-[1px] border-[#0C334A] rounded-[8px]"
@@ -142,8 +145,10 @@ onUnmounted(() => {
           </button>
         </div>
         <div class="mt-5 mb-8 font-myArial text-[12px]/[16px] text-center">
-          Создавая заказ, вы соглашаетесь с политикой обработки персональных
-          данных
+          <span>Создавая заказ, вы соглашаетесь с</span>
+          <span class="text-blue-600">
+            политикой обработки персональных данных</span
+          >
         </div>
       </div>
     </div>

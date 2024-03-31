@@ -84,6 +84,7 @@ watchEffect(() => {
           <UIBackToZakazButton />
           <UIOrderButton @order-form="showOrderForm" />
         </div>
+        <!-- Форма заказа -->
         <FormOrder />
       </div>
     </div>

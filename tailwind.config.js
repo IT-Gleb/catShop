@@ -21,7 +21,7 @@ export default {
         montserrat: ["Montserrat"],
         neucha: ["Neucha"],
         ptSansNarrow: ["PTSansNarrow"],
-        myArial: ["Arial", "sans-serif"],
+        myArial: ["Ubuntu", "Arial", "sans-serif"],
       },
       keyframes: {
         fromRight: {
