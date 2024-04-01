@@ -7,7 +7,7 @@ const isActive = ref<boolean>(false);
 const ThisItem = ref<TItem>(props.pItem);
 
 const store = useCatStore();
-const { AddItem, setItemCount, DeleteItem, inBag } = store;
+const { AddItem, setItemCount, DeleteItem, inBag, heartItem } = store;
 
 const clickActive = () => {
   isActive.value = !isActive.value;
@@ -38,6 +38,10 @@ const minusCount = () => {
 };
 watchEffect(() => {
   isActive.value = inBag(ThisItem.value.id).value;
+  if (isActive.value) {
+    ThisItem.value.heart = heartItem(ThisItem.value.id).value;
+    //console.log(ThisItem.value.id, ThisItem.value.heart);
+  }
 });
 </script>
 
@@ -49,7 +53,11 @@ watchEffect(() => {
     <header class="w-[100%]">
       <div class="w-fit mx-auto flex items-start justify-stretch">
         <img src="/assets/images/body/cat.png" alt="catItem" loading="lazy" />
-        <UIHeartButton :is-heart="pItem.heart" />
+        <UIHeartButton
+          :is-heart="ThisItem.heart"
+          :is-active="isActive"
+          :param-id="ThisItem.id"
+        />
       </div>
     </header>
     <main class="w-[100%] px-[30px] mt-6 h-[35%] flex-auto">

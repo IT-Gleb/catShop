@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="mt-[14px]">
     <div
@@ -24,18 +26,3 @@
     </div>
   </div>
 </template>
-
-<style>
-.phone::before {
-  display: inline-block;
-  content: url("/assets/images/body/icon-phone.svg");
-  background-image: url("/assets/images/body/icon-phone.png");
-  width: 32px;
-  height: 32px;
-  background-repeat: no-repeat;
-  /* background-position: left top; */
-}
-.phone {
-  background-color: lightblue;
-}
-</style>

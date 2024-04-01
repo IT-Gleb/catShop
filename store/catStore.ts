@@ -6,6 +6,7 @@ export const useCatStore = defineStore("catStore", () => {
   const items = ref<TItemData>([]);
   const active = ref<boolean>(false); //Для показа корзины заказов
   const activePanel = ref<boolean>(false); //Для скрытия панели
+  const discount = ref<number>(10); //Скидка в процентах от общей цены
 
   const itemsSize = computed(() => {
     return items.value.length;
@@ -36,6 +37,18 @@ export const useCatStore = defineStore("catStore", () => {
       }
     });
 
+  const heartItem = (paramId: number) =>
+    computed(() => {
+      let found: TItem | undefined = items.value.find(
+        (item) => item.id === paramId
+      );
+      if (found === undefined) {
+        return false;
+      } else {
+        return found.heart;
+      }
+    });
+
   const priceItem = (paramId: number) =>
     computed(() => {
       let found: TItem | undefined = items.value.find(
@@ -52,6 +65,10 @@ export const useCatStore = defineStore("catStore", () => {
     return items.value.reduce((acc, item) => {
       return acc + item.count * item.price;
     }, 0);
+  });
+
+  const allPriceWithDiscount = computed(() => {
+    return Math.round(allPrice.value - allPrice.value / discount.value);
   });
 
   function setPanel(param: boolean) {
@@ -88,6 +105,15 @@ export const useCatStore = defineStore("catStore", () => {
     }
   }
 
+  function setItemHeart(paramId: number, paramHeart: boolean) {
+    let found: TItem | undefined = items.value.find(
+      (item) => item.id === paramId
+    );
+    if (found !== undefined) {
+      found.heart = paramHeart;
+    }
+  }
+
   function setActive(param: boolean) {
     active.value = param;
   }
@@ -98,6 +124,8 @@ export const useCatStore = defineStore("catStore", () => {
     allItems,
     isActivePanel,
     allPrice,
+    allPriceWithDiscount,
+    heartItem,
     inBag,
     setActive,
     ItemCount,
@@ -106,5 +134,6 @@ export const useCatStore = defineStore("catStore", () => {
     setItemCount,
     setPanel,
     priceItem,
+    setItemHeart,
   };
 });

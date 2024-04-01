@@ -5,7 +5,7 @@ import { useOrder } from "~/store/orderStore";
 
 const store = useCatStore();
 
-const { allPrice } = storeToRefs(store);
+const { allPrice, allPriceWithDiscount } = storeToRefs(store);
 
 const orderStore = useOrder();
 const { getActive } = storeToRefs(orderStore);
@@ -113,7 +113,7 @@ onUnmounted(() => {
       <FormData />
 
       <div
-        class="mt-[14px] w-[540px] max-h-[290px] px-4 pt-4 overflow-hidden bg-white border-[1px] border-[#0C334A] rounded-[8px]"
+        class="mt-[14px] w-[540px] min-h-[290px] px-4 pt-4 overflow-hidden bg-white border-[1px] border-[#0C334A] rounded-[8px]"
       >
         <div class="grid grid-cols-2 font-myArial text-[18px]/[20px] px-12">
           <div class="pt-[16px] pb-[20px] font-[300] text-[#222222]/80">
@@ -127,21 +127,30 @@ onUnmounted(() => {
           <div class="col-span-2 border-t-[1px] border-t-[#D9D9D9]"></div>
           <div class="pt-[16px] pb-[20px] font-[400] text-[#222222]">
             Итого к оплате
+            <span class="text-[11px]/[13px] text-blue-800 font-light"
+              >(скидка 10%)</span
+            >
           </div>
           <div
             class="font-[400] pt-[16px] pb-[20px] text-[18px]/[20px] text-[#222222]"
           >
-            {{ allPrice }} ₽
+            {{ allPriceWithDiscount }} ₽
           </div>
         </div>
 
-        <div class="mt-[40px]">
+        <div class="mt-[40px] flex flex-col gap-y-2">
           <button
             title="Купить и оплатить"
-            @click.stop="clickClose"
             class="w-[508px] h-[48px] rounded-[4px] border-[1px] border-[#0C334A] bg-[#0C334A] text-center text-white text-[18px]/[20px] tracking-[0.05em] active:scale-75"
           >
             Купить и оплатить
+          </button>
+          <button
+            title="Закрыть"
+            @click.stop="clickClose"
+            class="w-[508px] h-[48px] rounded-[4px] border-[1px] border-[#0C334A] bg-[#0C334A] text-center text-white text-[18px]/[20px] tracking-[0.05em] active:scale-75"
+          >
+            Закрыть
           </button>
         </div>
         <div class="mt-5 mb-8 font-myArial text-[12px]/[16px] text-center">

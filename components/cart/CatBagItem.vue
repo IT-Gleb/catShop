@@ -1,9 +1,21 @@
 <script setup lang="ts">
 import type { TItem } from "~/mytypes/lib";
+import { useCatStore } from "~/store/catStore";
+
+const store = useCatStore();
+const { inBag, heartItem } = store;
 
 const props = defineProps<{ paramItem: TItem }>();
 
 const thisItem = ref<TItem>(props.paramItem);
+const selected = ref<boolean>(false);
+
+watchEffect(() => {
+  selected.value = inBag(thisItem.value.id).value;
+  if (selected.value) {
+    thisItem.value.heart = heartItem(thisItem.value.id).value;
+  }
+});
 </script>
 
 <template>
@@ -26,7 +38,11 @@ const thisItem = ref<TItem>(props.paramItem);
               class="font-neucha font-[400] text-[16px]/[25px] tracking-[0.1em] text-[#141414] uppercase"
               >{{ thisItem.name }}</span
             >
-            <UIHeartButton :is-heart="thisItem.heart" />
+            <UIHeartButton
+              :is-heart="thisItem.heart"
+              :is-active="selected"
+              :param-id="thisItem.id"
+            />
           </div>
 
           <p
