@@ -45,7 +45,7 @@ export default {
         fromRight: "fromRight 0.35s ease",
         toRight: "toRight 0.6s linear",
         fromTop: "fromTop 0.35s ease",
-        toTop: "toTop 0.35s ease",
+        toTop: "toTop 0.35s linear",
       },
     },
   },

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { logger } from "nuxt/kit";
 import { delayButton } from "~/mytypes/lib";
 import { useCatStore } from "~/store/catStore";
 import { useOrder } from "~/store/orderStore";

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const isSelected = ref<boolean>(false);
+const info = defineModel("info");
 </script>
 
 <template>
@@ -12,6 +13,8 @@ const isSelected = ref<boolean>(false);
       type="text"
       name="info"
       id="info"
+      v-model="info"
+      maxlength="150"
       placeholder="Дополнительная информация..."
       @focus="() => (isSelected = true)"
       @blur="() => (isSelected = false)"

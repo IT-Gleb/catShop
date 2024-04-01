@@ -1,4 +1,34 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useCatStore } from "~/store/catStore";
+
+const store = useCatStore();
+const { allPrice, allPriceWithDiscount } = storeToRefs(store);
+
+const { formData, v$ } = useValidateForm();
+
+const submitClick = () => {
+  v$.value.validate();
+  if (v$.value.error) {
+    console.log("Форма заказа заполнена не правильно...");
+    return false;
+  } else {
+  }
+};
+
+watch(formData, () => {
+  formData.discount = allPriceWithDiscount.value;
+  formData.price = allPrice.value;
+  //formData.phone = formData.phone.replaceAll("(", "").replaceAll(")", "");
+  // console.log(
+  //   formData.name,
+  //   formData.phone,
+  //   formData.info,
+  //   formData.price.toFixed(2)
+  // );
+
+  // console.log(v$);
+});
+</script>
 
 <template>
   <div class="mt-[14px]">
@@ -19,9 +49,12 @@
         class="w-[100%] px-[46px] pb-[28px] mt-2 grid grid-cols-1 gap-y-[22px]"
         action="#"
       >
+        <!-- <FormName v-model:client="formData.name" /> -->
         <FormName />
         <FormPhone />
-        <FormInfo />
+        <FormInfo v-model:info="formData.info" />
+        <input type="hidden" name="price" :value="allPrice" />
+        <input type="hidden" name="discount" :value="allPriceWithDiscount" />
       </form>
     </div>
   </div>
