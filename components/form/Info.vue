@@ -14,6 +14,7 @@ const info = defineModel("info");
       name="info"
       id="info"
       v-model="info"
+      autocomplete="off"
       maxlength="150"
       placeholder="Дополнительная информация..."
       @focus="() => (isSelected = true)"

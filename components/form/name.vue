@@ -17,6 +17,7 @@ const client = defineModel("client");
         id="UserName"
         v-model="client"
         placeholder="Имя..."
+        autocomplete="off"
         maxlength="100"
         @blur="() => (isSelected = false)"
         @focus="

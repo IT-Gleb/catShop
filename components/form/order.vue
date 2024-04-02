@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { logger } from "nuxt/kit";
 import { delayButton } from "~/mytypes/lib";
 import { useCatStore } from "~/store/catStore";
 import { useOrder } from "~/store/orderStore";
@@ -16,6 +15,8 @@ const isShow = ref<boolean>(false);
 const isOut = ref<boolean>(false);
 const timerRef = ref<any>(-1);
 
+const { v$, formData } = useValidateForm();
+
 const clickClose = (event: Event) => {
   event.preventDefault();
   isOut.value = true;
@@ -23,6 +24,30 @@ const clickClose = (event: Event) => {
     setOrderActive(false);
     isOut.value = false;
   }, delayButton);
+};
+
+const handleSubmit = async () => {
+  const res = await v$.value.$validate();
+  if (!res) {
+    return;
+  } else {
+    formData.update_phone = "+7" + formData.prefix + formData.phone;
+    formData.discount = allPriceWithDiscount.value;
+    formData.price = allPrice.value;
+    alert(
+      "Успешная валидация!" +
+        "\n" +
+        formData.name +
+        "\n" +
+        formData.update_phone +
+        "\n" +
+        formData.info +
+        "\n" +
+        formData.price +
+        "\n" +
+        formData.discount
+    );
+  }
 };
 
 watch(getActive, () => {
@@ -52,115 +77,114 @@ onUnmounted(() => {
         <span class="w-[8px] h-[8px] bg-[#191919] rounded-full"></span>
       </div>
 
-      <div
-        class="min-w-[540px] max-h-[154px] overflow-hidden rounded-[8px] bg-white p-4 mt-7 border-[0.5px] border-[#A5A5A5]"
-      >
-        <div class="flex items-center justify-start gap-x-[14px] font-myArial">
+      <!-- Форма заказа и кнопки -->
+      <form class="mt-[27px]" action="#" @submit.prevent="handleSubmit">
+        <!-- Верхний блок курьер -->
+        <div
+          class="w-[540px] min-h-[154px] bg-white rounded-[8px] border-[1px] border-[#0C334A] px-[16px] pt-[20px] pb-[32px] mt-[14px]"
+        >
           <div
-            class="w-[32px] h-[32px] rounded-full text-center p-1 font-[400] text-[20px]/[24px] text-white bg-[#D34A44]"
+            class="flex items-center justify-start gap-x-[14px] font-myArial"
           >
-            1
+            <span
+              class="block w-[32px] h-[32px] bg-[#D34A44] text-white text-[20px]/[22px] rounded-full text-center p-1"
+              >1</span
+            >
+            <span>Способ доставки</span>
           </div>
-          <h4 class="font-[300] text-[22px]/[24px] text-[#191919]">
-            Способ доставки
-          </h4>
+          <div
+            class="w-[100%] grid grid-cols-1 gap-y-[22px] font-myArial px-[46px]"
+          ></div>
+        </div>
+        <!-- Поля ввода -->
+        <div
+          class="w-[540px] min-h-[270px] bg-white rounded-[8px] border-[1px] border-[#0C334A] px-[16px] pt-[20px] pb-[32px] mt-[14px]"
+        >
+          <div
+            class="flex items-center justify-start gap-x-[14px] font-myArial"
+          >
+            <span
+              class="block w-[32px] h-[32px] bg-[#D34A44] text-white text-[20px]/[22px] rounded-full text-center p-1"
+              >2</span
+            >
+            <span>Данные для доставки</span>
+          </div>
+          <!-- Ввод данных телефон и прочее -->
+          <div
+            class="w-[100%] grid grid-cols-1 gap-y-[22px] font-myArial px-[46px]"
+          >
+            <div>
+              <FormName v-model:client="formData.name" />
+              <div
+                v-if="v$.name.$error"
+                class="w-[100%] font-myArial font-[300] text-[12px]/[14px] text-[#FF0000] mt-[4px]"
+              >
+                <span v-for="err in v$.name.$errors" :key="err.$uid">{{
+                  err.$message
+                }}</span>
+              </div>
+            </div>
+            <div>
+              <FormPhone
+                v-model:prefix="formData.prefix"
+                v-model:phone="formData.phone"
+              />
+              <div
+                v-if="v$.phone.$error || v$.prefix.$error"
+                class="w-[100%] font-myArial font-[300] text-[12px]/[14px] text-[#FF0000] mt-[4px]"
+              >
+                <span v-for="err in v$.prefix.$errors" :key="err.$uid">{{
+                  err.$message
+                }}</span>
+                <span v-for="err in v$.phone.$errors" :key="err.$uid">{{
+                  err.$message
+                }}</span>
+              </div>
+            </div>
+            <FormInfo v-model:info="formData.info" />
+          </div>
         </div>
 
         <div
-          class="pl-[62px] pr-[32px] font-myArial grid grid-cols-[32px_32px_1fr_1fr] gap-x-5 gap-y-[14px] mt-3"
+          class="w-[540px] min-h-[270px] bg-white rounded-[8px] border-[1px] border-[#0C334A] px-[16px] py-[32px] mt-[14px]"
         >
           <div
-            class="w-[32px] h-[32px] rounded-full border-[0.5px] border-[#A5A5A5]"
-          ></div>
-          <div>
-            <img
-              class="w-[32px]"
-              src="/assets/images/body/delivery.svg"
-              alt="delivery"
-              loading="lazy"
-            />
-          </div>
-          <div class="text-[#A5A5A5] text-[18px]/[20px] ml-5">Курьер</div>
-          <div class="text-[#FF0000] text-[12px]/[14px]">
-            Временно не доступно
-          </div>
-          <!-- 2 stroka -->
-          <div class="w-[32px] h-[32px] relative rounded-full bg-[#0ACF83]">
-            <img
-              class="w-[16px] absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%]"
-              src="/assets/images/body/check.svg"
-              alt="check"
-              loading="lazy"
-            />
-          </div>
-          <div>
-            <img
-              class="w-[30px]"
-              src="/assets/images/body/shopping-bag.svg"
-              alt="bag"
-              loading="lazy"
-            />
-          </div>
-          <div class="text-[#A5A5A5] text-[18px]/[20px] ml-5">Самовывоз</div>
-          <div class="font-myArial text-[#3F4871]">
-            <span class="block font-[700] text-[14px]/[16px]">Скидка - 10%</span
-            ><span class="block font-[700] text-[8px]/[10px]"
-              >на стоиомость покупки</span
-            >
-          </div>
-        </div>
-      </div>
-      <!-- Форма ввода и валидации -->
-      <FormData />
-
-      <div
-        class="mt-[14px] w-[540px] min-h-[290px] px-4 pt-4 overflow-hidden bg-white border-[1px] border-[#0C334A] rounded-[8px]"
-      >
-        <div class="grid grid-cols-2 font-myArial text-[18px]/[20px] px-12">
-          <div class="pt-[16px] pb-[20px] font-[300] text-[#222222]/80">
-            Cтоимость товаров
-          </div>
-          <div
-            class="font-[400] pt-[16px] pb-[20px] text-[18px]/[20px] text-[#222222]"
+            class="w-[100%] grid grid-cols-[50%_200px] gap-x-[45px] gap-y-[20px] px-[46px] font-myArial font-[300] text-[18px]/[20px] text-[#222222]"
           >
-            {{ allPrice }} ₽
+            <input type="hidden" :value="allPrice" />
+            <input type="hidden" :value="allPriceWithDiscount" />
+            <span class="font-light">Cтоимость товаров</span
+            ><span class="font-[400]">{{ allPrice }} ₽</span>
+            <div class="col-span-2 border-t-2 border-t-[#D9D9D9]"></div>
+            <span class="font-[400]"
+              >Итого к оплате
+              <span class="text-[12px]/[13px] text-blue-500 whitespace-nowrap">
+                скидка (10%)</span
+              ></span
+            ><span class="font-[400]">{{ allPriceWithDiscount }} ₽</span>
           </div>
-          <div class="col-span-2 border-t-[1px] border-t-[#D9D9D9]"></div>
-          <div class="pt-[16px] pb-[20px] font-[400] text-[#222222]">
-            Итого к оплате
-            <span class="text-[11px]/[13px] text-blue-800 font-light"
-              >(скидка 10%)</span
-            >
-          </div>
-          <div
-            class="font-[400] pt-[16px] pb-[20px] text-[18px]/[20px] text-[#222222]"
-          >
-            {{ allPriceWithDiscount }} ₽
-          </div>
-        </div>
-
-        <div class="mt-[40px] flex flex-col gap-y-2">
+          <input
+            class="col-span-2 w-[100%] bg-[#0C334A] text-white text-[18px]/[20px] tracking-[0.05em] font-medium mt-[40px] border-[1px] border-[#0C334A] rounded-[4px] py-[14px] active:scale-75"
+            type="submit"
+            value="Купить и оплатить"
+          />
           <button
-            title="Купить и оплатить"
-            class="w-[508px] h-[48px] rounded-[4px] border-[1px] border-[#0C334A] bg-[#0C334A] text-center text-white text-[18px]/[20px] tracking-[0.05em] active:scale-75"
-          >
-            Купить и оплатить
-          </button>
-          <button
-            title="Закрыть"
-            @click.stop="clickClose"
-            class="w-[508px] h-[48px] rounded-[4px] border-[1px] border-[#0C334A] bg-[#0C334A] text-center text-white text-[18px]/[20px] tracking-[0.05em] active:scale-75"
+            @click="clickClose"
+            class="col-span-2 w-[100%] bg-[#0C334A] text-white text-[18px]/[20px] tracking-[0.05em] font-medium mt-[8px] border-[1px] border-[#0C334A] rounded-[4px] py-[14px] active:scale-75"
           >
             Закрыть
           </button>
+          <div class="col-span-2 mt-5 text-center">
+            <span class="text-[12px]/[16px] font-[300] font-myArial"
+              >Создавая заказ, вы соглашаетесь с
+              <span class="text-blue-800"
+                >политикой обработки персональных данных</span
+              ></span
+            >
+          </div>
         </div>
-        <div class="mt-5 mb-8 font-myArial text-[12px]/[16px] text-center">
-          <span>Создавая заказ, вы соглашаетесь с</span>
-          <span class="text-blue-600">
-            политикой обработки персональных данных</span
-          >
-        </div>
-      </div>
+      </form>
+      <!--End of Форма заказа и кнопки -->
     </div>
   </div>
 </template>
