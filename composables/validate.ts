@@ -16,12 +16,16 @@ export function useValidateForm() {
     info: "",
     price: 0,
     discount: 0,
+    update_phone: "",
   });
 
   const rules = computed(() => {
     return {
       name: {
-        requred: helpers.withMessage("Не менее 3-х символов...", required),
+        requred: helpers.withMessage(
+          "Обязательное поле.Не менее 3-х символов...",
+          required
+        ),
         minLength: helpers.withMessage(
           "Длина имени должна быть больше 3-х символов...",
           minLength(3)

@@ -6,7 +6,7 @@ const info = defineModel("info");
 <template>
   <div
     class="mt-[18px] flex items-start justify-start gap-x-1 border-b-2 outline-none before:w-[32px] before:h-[32px] before:p-2 before:content-[url('/assets/images/body/info.svg')]"
-    :class="isSelected ? 'border-b-[#FF0000]' : ' border-b-[#D9D9D9]'"
+    :class="isSelected ? 'border-b-[blue]' : ' border-b-[#D9D9D9]'"
   >
     <input
       class="w-[100%] h-[32px] outline-none bg-white text-[#4C4C4C] font-[300] text-[16px]/[18px] p-2"

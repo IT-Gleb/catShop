@@ -1,30 +1,25 @@
 <script setup lang="ts">
 const isSelected = ref<boolean>(false);
-const { formData, v$ } = useValidateForm();
-//const phone = defineModel("phone");
 
-const changePrefix = (event: Event) => {
-  const target = <HTMLInputElement>event.target;
-  formData.prefix = target.value;
-  //console.log(formData.prefix);
-};
+const phone = defineModel("phone");
+const prefix = defineModel("prefix");
 
-watch(formData, () => {
-  v$.value.$validate();
-});
+// const changePrefix = (event: Event) => {
+//   const target = <HTMLInputElement>event.target;
+//   formData.prefix = target.value;
+//   //console.log(formData.prefix);
+// };
+
+// watch(formData, () => {
+//   v$.value.$validate();
+// });
 </script>
 
 <template>
   <div class="grid grid-cols-1 items-start">
     <div
       class="flex items-start before:content-[url('/assets/images/body/icon-phone.svg')] before:w-[32px] before:h-[32px] before:p-1 before:mr-1 border-b-2"
-      :class="
-        v$.phone.$error
-          ? 'border-b-[#FF0000]'
-          : isSelected
-          ? 'border-b-[#000000]'
-          : 'border-b-[#D9D9D9]'
-      "
+      :class="isSelected ? 'border-b-[blue]' : 'border-b-[#D9D9D9]'"
     >
       <span class="py-2 px-0 h-[32px] text-[14px]/[16px] font-bold">+7(</span>
       <input
@@ -33,9 +28,10 @@ watch(formData, () => {
         maxlength="3"
         size="3"
         placeholder="code"
+        v-model="prefix"
         @focus="
           () => {
-            v$.prefix.$touch;
+            //v$.prefix.$touch();
             isSelected = true;
           }
         "
@@ -44,8 +40,6 @@ watch(formData, () => {
             isSelected = false;
           }
         "
-        :value="formData.prefix"
-        @change="changePrefix"
       />
       <span class="py-2 px-0 h-[32px] text-[14px]/[16px] font-bold">)</span>
       <input
@@ -53,13 +47,13 @@ watch(formData, () => {
         type="text"
         name="phone"
         id="phone"
-        v-model="formData.phone"
+        v-model="phone"
         maxlength="12"
         placeholder="Tелефон..."
         @focus="
           () => {
             isSelected = true;
-            v$.phone.$touch;
+            //v$.phone.$touch();
           }
         "
         @blur="
@@ -68,23 +62,6 @@ watch(formData, () => {
           }
         "
       />
-    </div>
-    <div
-      v-if="v$.prefix.$error"
-      class="mt-[4px] col-span-2 text-[12px]/[14px] text-[#FF0000] font-[300] first-letter:uppercase self-start"
-    >
-      <div v-for="err in v$.prefix.$errors" :key="err.$uid">
-        {{ err.$message }}
-      </div>
-    </div>
-
-    <div
-      v-if="v$.phone.$error"
-      class="mt-[4px] col-span-2 text-[12px]/[14px] text-[#FF0000] font-[300] first-letter:uppercase self-start"
-    >
-      <div v-for="err in v$.phone.$errors" :key="err.$uid">
-        {{ err.$message }}
-      </div>
     </div>
   </div>
 </template>

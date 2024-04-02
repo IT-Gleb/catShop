@@ -6,28 +6,47 @@ const { allPrice, allPriceWithDiscount } = storeToRefs(store);
 
 const { formData, v$ } = useValidateForm();
 
-const submitClick = () => {
-  v$.value.validate();
-  if (v$.value.error) {
-    console.log("Форма заказа заполнена не правильно...");
-    return false;
-  } else {
-  }
-};
-
 watch(formData, () => {
+  v$.value.$validate();
   formData.discount = allPriceWithDiscount.value;
   formData.price = allPrice.value;
   //formData.phone = formData.phone.replaceAll("(", "").replaceAll(")", "");
-  // console.log(
-  //   formData.name,
-  //   formData.phone,
-  //   formData.info,
-  //   formData.price.toFixed(2)
-  // );
 
   // console.log(v$);
 });
+
+const clickSubmit = async (event: Event) => {
+  //console.log(event.target);
+  console.log(
+    formData.name,
+    formData.prefix,
+    formData.phone,
+    formData.info,
+    formData.price.toFixed(2),
+    formData.discount.toFixed(2)
+  );
+  const res = await v$.value.$validate();
+  if (!res) {
+    console.log("Форма заполнена с ошибками!");
+    return;
+  }
+  alert("Форма - OK");
+  formData.update_phone = "+7" + formData.prefix + formData.phone;
+  if (v$.value.$error) {
+    console.log("Форма заполнена не правильно!");
+    if (v$.value.$errors.length > 0) {
+      let err = "";
+      v$.value.$errors.forEach((item) => err + " " + item.$message);
+      console.log(err);
+    }
+
+    console.log(v$.value.$errors.length);
+    return false;
+  } else {
+    console.log("Форма заполнена корректно!", formData.update_phone);
+    return true;
+  }
+};
 </script>
 
 <template>
@@ -48,13 +67,51 @@ watch(formData, () => {
       <form
         class="w-[100%] px-[46px] pb-[28px] mt-2 grid grid-cols-1 gap-y-[22px]"
         action="#"
+        @submit.prevent="clickSubmit"
       >
         <!-- <FormName v-model:client="formData.name" /> -->
-        <FormName />
-        <FormPhone />
+        <FormName v-model:client="formData.name" />
+        <span
+          v-if="v$.name.$error"
+          class="w-[100%] text-[12px]/[14px] text-[#FF0000] font-[300] first-letter:uppercase"
+        >
+          <span v-for="err in v$.name.$errors" :key="err.$uid">
+            {{ err.$message }}
+          </span>
+        </span>
+        <FormPhone
+          v-model:prefix="formData.prefix"
+          v-model:phone="formData.phone"
+        />
+        <span
+          v-if="v$.prefix.$error"
+          class="text-[12px]/[14px] text-[#FF0000] font-[300] first-letter:uppercase self-start"
+        >
+          <span v-for="err in v$.prefix.$errors" :key="err.$uid">
+            {{ err.$message }}
+          </span>
+        </span>
+
+        <span
+          v-if="v$.phone.$error"
+          class="text-[12px]/[14px] text-[#FF0000] font-[300] first-letter:uppercase"
+        >
+          <span v-for="err in v$.phone.$errors" :key="err.$uid">
+            {{ err.$message }}
+          </span>
+        </span>
         <FormInfo v-model:info="formData.info" />
         <input type="hidden" name="price" :value="allPrice" />
         <input type="hidden" name="discount" :value="allPriceWithDiscount" />
+        <input
+          type="submit"
+          value="Abc"
+          @click.stop="
+            () => {
+              return false;
+            }
+          "
+        />
       </form>
     </div>
   </div>
