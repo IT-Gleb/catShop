@@ -1,6 +1,7 @@
 <template>
   <div>
     <MainWrapper>
+      <CartCatBag></CartCatBag>
       <h1 class="uppercase text-[32px]/[48px] w-fit mx-auto">Котики</h1>
       <p class="mt-5">
         Далеко-далеко за словесными горами в стране гласных и согласных, живут

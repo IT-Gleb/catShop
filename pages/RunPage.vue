@@ -1,6 +1,7 @@
 <template>
   <div>
     <MainWrapper>
+      <CartCatBag></CartCatBag>
       <section>
         <h1 class="w-fit mx-auto text-[32px]/[48px] uppercase">
           Доставка. Страница доставки.

@@ -45,21 +45,26 @@ const handleSubmit = async () => {
     formData.update_phone = "+7" + formData.prefix + formData.phone;
     formData.discount = allPriceWithDiscount.value;
     formData.price = allPrice.value;
-    alert(
+
+    const msg: string =
+      Picked.value === pickValues.value[0]
+        ? String(formData.price.toFixed(2))
+        : String(formData.discount.toFixed(2));
+    const message: string =
       "Успешная валидация!" +
-        "\n" +
-        Picked.value +
-        "\n" +
-        formData.name +
-        "\n" +
-        formData.update_phone +
-        "\n" +
-        formData.info +
-        "\n" +
-        formData.price.toFixed(2) +
-        "\n" +
-        formData.discount.toFixed(2)
-    );
+      "\n" +
+      Picked.value +
+      "\n" +
+      formData.name +
+      "\n" +
+      formData.update_phone +
+      "\n" +
+      formData.info +
+      "\n" +
+      formData.price.toFixed(2) +
+      "\n" +
+      msg;
+    alert(message);
   }
 };
 
