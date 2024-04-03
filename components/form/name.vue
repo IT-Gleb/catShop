@@ -2,6 +2,9 @@
 const isSelected = ref<boolean>(false);
 const client = defineModel("client");
 //const { v$ } = useValidateForm();
+const vMyFocus = {
+  mounted: (el: HTMLInputElement) => el.focus(),
+};
 </script>
 
 <template>
@@ -19,6 +22,7 @@ const client = defineModel("client");
         placeholder="Имя..."
         autocomplete="off"
         maxlength="100"
+        v-my-focus
         @blur="() => (isSelected = false)"
         @focus="
           () => {

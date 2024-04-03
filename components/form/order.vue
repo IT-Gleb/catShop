@@ -14,11 +14,22 @@ const { setOrderActive } = orderStore;
 const isShow = ref<boolean>(false);
 const isOut = ref<boolean>(false);
 const timerRef = ref<any>(-1);
+const pickValues = ref<string[]>(["Курьер", "Самовывоз"]);
+const Picked = ref<string>(pickValues.value[1]);
 
 const { v$, formData } = useValidateForm();
 
 const clickClose = (event: Event) => {
   event.preventDefault();
+
+  formData.name = "";
+  formData.phone = "";
+  formData.prefix = "";
+  formData.update_phone = "";
+  formData.discount = 0;
+  formData.price = 0;
+  formData.info = "";
+
   isOut.value = true;
   timerRef.value = setTimeout(() => {
     setOrderActive(false);
@@ -37,15 +48,17 @@ const handleSubmit = async () => {
     alert(
       "Успешная валидация!" +
         "\n" +
+        Picked.value +
+        "\n" +
         formData.name +
         "\n" +
         formData.update_phone +
         "\n" +
         formData.info +
         "\n" +
-        formData.price +
+        formData.price.toFixed(2) +
         "\n" +
-        formData.discount
+        formData.discount.toFixed(2)
     );
   }
 };
@@ -94,7 +107,68 @@ onUnmounted(() => {
           </div>
           <div
             class="w-[100%] grid grid-cols-1 gap-y-[22px] font-myArial px-[46px]"
-          ></div>
+          >
+            <div
+              class="grid grid-cols-[32px_32px_1fr_2fr] gap-x-[40px] gap-y-[14px] items-center justify-start mt-[12px]"
+            >
+              <label for="delivery">
+                <input
+                  class="inline-block w-[0px] h-[0px] opacity-0 p-1 cursor-pointer peer"
+                  type="radio"
+                  name="delivery"
+                  id="delivery"
+                  :value="pickValues[0]"
+                  v-model="Picked"
+                />
+                <div
+                  class="inline-block w-[32px] h-[32px] rounded-full p-2 bg-[green] bg-[url('/assets/images/body/check-box.svg')] bg-[length(70%_70%)] bg-no-repeat bg-center cursor-pointer mt-[-12px] peer-checked:bg-[url('assets/images/body/check.svg')]"
+                ></div>
+              </label>
+              <img
+                class="block w-[30px] h-[30px]"
+                src="/assets/images/body/delivery.svg"
+                alt="delivery"
+                loading="lazy"
+              />
+              <span class="font-myArial text-[18px]/[20px] text-[#A5A5A5]"
+                >Курьер</span
+              >
+              <span
+                class="font-myArial text-[12px]/[14px] text-[#FF0000] font-[300] ml-[35px] whitespace-nowrap"
+                >Временно не доступно</span
+              >
+              <!-- Вторая линия -->
+              <label>
+                <input
+                  class="inline-block w-[0px] h-[0px] opacity-0 p-1 cursor-pointer peer"
+                  type="radio"
+                  name="delivery"
+                  :value="pickValues[1]"
+                  checked
+                  v-model="Picked"
+                />
+                <div
+                  class="inline-block w-[32px] h-[32px] rounded-full p-2 bg-[green] bg-[url('/assets/images/body/check-box.svg')] bg-[length(70%_70%)] bg-no-repeat bg-center cursor-pointer mt-[-12px] peer-checked:bg-[url('assets/images/body/check.svg')]"
+                ></div>
+              </label>
+              <img
+                class="block w-[30px] h-[30px]"
+                src="/assets/images/body/shopping-bag.svg"
+                alt="delivery"
+                loading="lazy"
+              />
+              <span class="font-myArial text-[18px]/[20px] text-[#222222]"
+                >Самовывоз</span
+              >
+              <span
+                class="font-myArial text-[14px]/[16px] text-[#3F4871] font-[700] ml-[35px]"
+                >Скидка - 10%
+                <span class="block text-[8px]/[9px]"
+                  >на стоиомость покупки</span
+                ></span
+              >
+            </div>
+          </div>
         </div>
         <!-- Поля ввода -->
         <div
@@ -158,10 +232,16 @@ onUnmounted(() => {
             <div class="col-span-2 border-t-2 border-t-[#D9D9D9]"></div>
             <span class="font-[400]"
               >Итого к оплате
-              <span class="text-[12px]/[13px] text-blue-500 whitespace-nowrap">
+              <span
+                v-if="Picked === pickValues[1]"
+                class="text-[12px]/[13px] text-blue-500 whitespace-nowrap"
+              >
                 скидка (10%)</span
-              ></span
-            ><span class="font-[400]">{{ allPriceWithDiscount }} ₽</span>
+              > </span
+            ><span v-if="Picked === pickValues[1]" class="font-[400]"
+              >{{ allPriceWithDiscount }} ₽</span
+            >
+            <span v-else>{{ allPrice }} ₽</span>
           </div>
           <input
             class="col-span-2 w-[100%] bg-[#0C334A] text-white text-[18px]/[20px] tracking-[0.05em] font-medium mt-[40px] border-[1px] border-[#0C334A] rounded-[4px] py-[14px] active:scale-75"
