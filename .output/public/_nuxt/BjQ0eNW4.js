@@ -1,1 +1,0 @@
-import{c as n,b as o,W as a,o as r,X as c}from"./BcxvTYIe.js";import{_ as s}from"./DlAUqK2U.js";const _={};function m(t,f){const e=c;return r(),n("div",null,[o(e,{name:"header-top"}),a(t.$slots,"default"),o(e,{name:"footer-bottom"})])}const u=s(_,[["render",m]]);export{u as default};
