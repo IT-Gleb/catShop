@@ -8,7 +8,7 @@ const { itemsSize, allItems } = storeToRefs(store);
 <template>
   <div
     v-if="itemsSize > 0"
-    class="mt-[30px] px-[45px] h-[62vh] overflow-x-hidden overflow-y-auto"
+    class="mt-[30px] px-[4px] lg:px-[45px] h-[62vh] overflow-x-hidden overflow-y-auto"
   >
     <div class="grid grid-cols-1 gap-y-[6px]">
       <TransitionGroup name="items">

@@ -21,12 +21,14 @@ watchEffect(() => {
 <template>
   <div v-if="thisItem">
     <div
-      class="min-w-[200px] h-[112px] bg-[#FAFAFA] shadow-[0px_0px_12px_0px_#00000040] rounded-[8px] pt-[15px] pb-[15px] pl-[15px] pr-0 overflow-hidden"
+      class="min-w-[200px] h-[112px] bg-[#FAFAFA] shadow-[0px_0px_12px_0px_#00000040] rounded-[8px] pt-[8px] lg:pt-[15px] pb-[8px] lg:pb-[15px] pl-[15px] pr-0 overflow-hidden"
     >
-      <div class="w-[100%] grid grid-cols-[80px_3fr_2fr_1fr] gap-x-[25px]">
+      <div
+        class="w-[100%] grid grid-cols-[40px_3fr_2fr_1fr] lg:grid-cols-[80px_3fr_2fr_1fr] gap-x-[12px] lg:gap-x-[25px]"
+      >
         <div>
           <img
-            class="block w-[80px]"
+            class="block w-[40px] lg:w-[80px]"
             src="/assets/images/body/cat_80x60.png"
             alt="cat"
             loading="lazy"
