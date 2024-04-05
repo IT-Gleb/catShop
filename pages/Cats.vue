@@ -1,5 +1,9 @@
+<script setup lang="ts">
+import MobileMenu from "~/components/menu/mobile/MobileMenu.vue";
+</script>
 <template>
   <div>
+    <MobileMenu />
     <MainWrapper>
       <CartCatBag></CartCatBag>
       <h1 class="uppercase text-[32px]/[48px] w-fit mx-auto">Котики</h1>

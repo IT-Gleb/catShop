@@ -14,12 +14,14 @@ const active = ref<boolean>(false);
       </div>
       <div class="w-[90px] mx-auto md:ml-[16px] xl:w-[204px] xl:ml-0">
         <div class="xl:hidden flex items-center justify-center">
-          <img
-            class="w-[98px] pt-4"
-            src="/assets/images/header/smallLogo.png"
-            alt="small-logo"
-            loading="lazy"
-          />
+          <NuxtLink to="/">
+            <img
+              class="w-[98px] pt-4"
+              src="/assets/images/header/smallLogo.png"
+              alt="small-logo"
+              loading="lazy"
+            />
+          </NuxtLink>
         </div>
         <NuxtLink class="hidden xl:block" to="/">
           <img

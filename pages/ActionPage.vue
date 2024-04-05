@@ -1,5 +1,10 @@
+<script setup lang="ts">
+import MobileMenu from "~/components/menu/mobile/MobileMenu.vue";
+</script>
+
 <template>
   <div>
+    <MobileMenu />
     <MainWrapper>
       <CartCatBag></CartCatBag>
 
