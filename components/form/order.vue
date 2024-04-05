@@ -127,7 +127,7 @@ onUnmounted(() => {
               >
                 <label for="delivery">
                   <input
-                    class="inline-block w-[0px] h-[0px] opacity-0 p-1 cursor-pointer peer"
+                    class="inline-block w-[0px] h-[0px] opacity-0 cursor-pointer peer"
                     type="radio"
                     name="delivery"
                     id="delivery"
@@ -155,7 +155,7 @@ onUnmounted(() => {
                 <!-- Вторая линия -->
                 <label>
                   <input
-                    class="inline-block w-[0px] h-[0px] opacity-0 p-1 cursor-pointer peer"
+                    class="inline-block w-[0px] h-[0px] opacity-0 cursor-pointer peer"
                     type="radio"
                     name="delivery"
                     :value="pickValues[1]"

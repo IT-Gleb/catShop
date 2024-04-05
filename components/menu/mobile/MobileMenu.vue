@@ -23,7 +23,7 @@ const { getActive } = storeToRefs(store);
 <template>
   <section
     v-if="getActive"
-    class="inline-block w-[100%] min-h-[5vh] bg-slate-100 font-montserrat p-4 lg:hidden shadow-[0px_4px_4px_0_rgba(0,_0,_0,_0.25)]"
+    class="inline-block w-[100%] h-fit bg-slate-100 font-montserrat px-4 pt-4 pb-0 lg:hidden shadow-[0px_4px_4px_0_rgba(0,_0,_0,_0.1)]"
     :class="getActive ? ' animate-fromRight' : ' animate-toTop'"
   >
     <ul
@@ -40,10 +40,34 @@ const { getActive } = storeToRefs(store);
           <span> Корзина </span>
         </NuxtLink>
       </li>
-      <li><NuxtLink to="/Cats">Котики</NuxtLink></li>
-      <li><NuxtLink to="/RunPage">Доставка</NuxtLink></li>
-      <li><NuxtLink to="/ActionPage">Акции</NuxtLink></li>
-      <li><NuxtLink to="/ContactsPage">Контакты</NuxtLink></li>
+      <li>
+        <NuxtLink
+          to="/Cats"
+          exact-active-class="bg-[#121212] text-white text-[12px]/[16px] rounded-t-md p-2 pb-0 font-normal"
+          >Котики</NuxtLink
+        >
+      </li>
+      <li>
+        <NuxtLink
+          to="/RunPage"
+          exact-active-class="bg-[#121212] text-white text-[12px]/[16px] rounded-t-md p-2 pb-0 font-normal"
+          >Доставка</NuxtLink
+        >
+      </li>
+      <li>
+        <NuxtLink
+          to="/ActionPage"
+          exact-active-class="bg-[#121212] text-white text-[12px]/[16px] rounded-t-md p-2 pb-0 font-normal"
+          >Акции</NuxtLink
+        >
+      </li>
+      <li>
+        <NuxtLink
+          to="/ContactsPage"
+          exact-active-class="bg-[#121212] text-white text-[12px]/[16px] rounded-t-md p-2 pb-0 font-normal"
+          >Контакты</NuxtLink
+        >
+      </li>
     </ul>
   </section>
 </template>
