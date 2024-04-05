@@ -15,6 +15,7 @@ export default {
       "2xl": "1280px",
       "3xl": "1530px",
       "4xl": "1920px",
+      tall: { raw: "(max-height: 667px)" },
     },
     extend: {
       fontFamily: {

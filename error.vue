@@ -31,7 +31,7 @@ const handleError = () => {
         </button>
       </div>
     </section>
-    <section v-else class="w-fit mx-auto mt-[20]">
+    <section v-else class="w-fit mx-auto mt-[20px]">
       <p>Возникла ошибка - {{ myError?.statusCode }}</p>
       <p>{{ myError?.statusMessage }}</p>
       <p>{{ myError?.message }}</p>

@@ -84,9 +84,11 @@ watchEffect(() => {
         </div>
 
         <!-- //Кнопки заказов -->
-        <div class="fixed lg:px-[70px] w-[100%] bottom-1 lg:bottom-11">
+        <div
+          class="fixed lg:px-[70px] xl:px-[10px] w-[100%] bottom-1 lg:bottom-11"
+        >
           <div
-            class="w-[100%] grid grid-cols-1 lg:grid-cols-[20%_20%] gap-y-[12px] items-start px-6 lg:gap-x-[30px]"
+            class="w-[100%] grid grid-cols-1 lg:grid-cols-[25%_25%] xl:grid-cols-[16%_16%] gap-y-[12px] items-start px-6 lg:gap-x-[30px]"
           >
             <UIBackToZakazButton />
             <UIOrderButton @order-form="showOrderForm" />
