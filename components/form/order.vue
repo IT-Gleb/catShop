@@ -194,7 +194,7 @@ onUnmounted(() => {
               class="flex items-center justify-start gap-x-[10px] lg:gap-x-[14px] font-myArial"
             >
               <span
-                class="block w-[32px] h-[32px] bg-[#D34A44] text-white text-[14px]/[16px] lg:text-[20px]/[22px] rounded-full text-center p-2"
+                class="block w-[32px] h-[32px] bg-[#D34A44] text-white text-[14px]/[16px] lg:text-[20px]/[22px] rounded-full text-center p-2 lg:p-1"
                 >2</span
               >
               <span class="text-[14px]/[16px] lg:text-[20px]/[22px]"
