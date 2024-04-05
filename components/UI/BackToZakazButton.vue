@@ -25,7 +25,7 @@ onUnmounted(() => {
   <button
     title="Вернуться к покупкам"
     @click="clickButton"
-    class="border-[1px] border-[#AFAFAF] bg-white py-[8px] px-[12px] xl:py-[20px] xl:px-[24px] font-neucha text-[14px]/[16px] xl:text-[18px]/[20px] font-[400] tracking-[0.05em] rounded-[8px] text-black h-[58px] shadow-[0px_0px_12px_0px_#00000040] active:scale-75 overflow-hidden"
+    class="border-[1px] border-[#AFAFAF] bg-white py-[8px] px-[12px] lg:py-[20px] lg:px-[24px] font-neucha text-[14px]/[16px] lg:text-[18px]/[20px] font-[400] tracking-[0.05em] rounded-[8px] text-black h-[58px] shadow-[0px_0px_12px_0px_#00000040] active:scale-75 overflow-hidden"
   >
     Вернуться к покупкам
   </button>
