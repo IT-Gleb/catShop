@@ -74,9 +74,6 @@
       "#tailwind-config": [
         "./tailwind.config"
       ],
-      "#tailwind-config/*": [
-        "./tailwind.config/*"
-      ],
       "pinia": [
         "../node_modules/pinia/dist/pinia"
       ],
@@ -87,7 +84,7 @@
         "./imports"
       ],
       "#app-manifest": [
-        "./manifest/meta/dev"
+        "./manifest/meta/d2ba9d2c-cabf-40c7-b63d-3f08a593c9ae.json"
       ],
       "#build": [
         "."

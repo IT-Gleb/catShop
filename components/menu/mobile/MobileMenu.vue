@@ -17,14 +17,14 @@ const callStore = (event: Event) => {
 };
 const store = useMobileMenuStore();
 
-const { getActive } = storeToRefs(store);
+const { getActive, getOnce } = storeToRefs(store);
 </script>
 
 <template>
   <section
     v-if="getActive"
     class="inline-block w-[100%] h-fit bg-slate-100 font-montserrat px-4 pt-4 pb-0 lg:hidden shadow-[0px_4px_4px_0_rgba(0,_0,_0,_0.1)]"
-    :class="getActive ? ' animate-fromRight' : ' animate-toTop'"
+    :class="getOnce ? 'animate-fromRight' : ''"
   >
     <ul
       class="flex items-center justify-center gap-x-3 text-[10px]/[16px] font-bold uppercase"

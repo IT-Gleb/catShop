@@ -15,7 +15,7 @@ const { isShow, show, hide } = forButton();
     <div v-intercept="{ func: hide }"></div>
     <section v-if="!pending && !error" class="mt-[50px] w-fit mx-auto gridData">
       <ItemCat v-for="item in data" :key="item.id" :p-item="item" />
-      <div v-if="isShow" class="fixed bottom-16 right-8 animate-fromTop">
+      <div v-if="isShow" class="fixed bottom-[80px] right-8 animate-fromTop">
         <UIUpButton />
       </div>
     </section>

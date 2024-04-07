@@ -3,6 +3,11 @@ export default defineNuxtConfig({
   devtools: { enabled: false },
   app: {
     baseURL: "/catShop/",
+    head: {
+      // link: [
+      //   { rel: "icon", type: "image/x-icon", href: "/assets/favicon.ico" },
+      // ],
+    },
   },
   css: ["~/assets/css/tailwind.css"],
   modules: ["@nuxtjs/tailwindcss", "@pinia/nuxt", "nuxt-lodash"],

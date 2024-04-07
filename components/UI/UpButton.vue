@@ -14,7 +14,7 @@ const clickUp = () => {
       class="w-[32px] h-[32px]"
       src="/assets/images/body/arrow-up.svg"
       alt="up"
-      losding="lazy"
+      loading="lazy"
     />
   </button>
 </template>
